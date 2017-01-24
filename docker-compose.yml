@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    environment:
+      MYSQL_DATABASE: movies_db
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./src/main/resources/config/mysql/conf:/etc/mysql/conf.d:ro
+      - ./src/main/resources/config/mysql/init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "3306:3306"
+  web:
+    build: .
+    links:
+     - db
+    volumes:
+    - ~/jde/docker/tomcat/logs:/usr/local/tomcat/logs
+    ports:
+     - "8080:8080"
+    environment:
+      APP_ENV: container
