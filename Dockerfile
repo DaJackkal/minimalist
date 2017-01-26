@@ -9,4 +9,4 @@ RUN apt-get update && apt-get install -y nano
 COPY $LOCAL_CONF/tomcat/conf/tomcat-users.xml $CATALINA_HOME/conf
 COPY target/rest-spring-jdbc.war $CATALINA_HOME/webapps/rest-spring-jdbc.war
 
-CMD ["catalina.sh", "run"]
+CMD ["catalina.sh", "jpda","run"]

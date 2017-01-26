@@ -1,5 +1,12 @@
-version: '2'
+version: '3'
 services:
+#  build:
+#    image: maven:3.3.9-jdk-8
+#    volumes:
+#      - ~/.m2:/root/.m2
+#      - .:/usr/src/working_dir
+#    working_dir: /usr/src/working_dir
+#    command: mvn clean install
   db:
     image: mysql:8
     container_name: mysql_db
@@ -19,5 +26,8 @@ services:
     - ~/jde/docker/tomcat/logs:/usr/local/tomcat/logs
     ports:
      - "8080:8080"
+     - "8000:8000"
     environment:
       APP_ENV: container
+      JPDA_ADDRESS: 8000
+      JPDA_TRANSPORT: dt_socket
